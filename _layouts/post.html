@@ -1,0 +1,34 @@
+---
+layout: default
+---
+
+<div class="post">
+  <div class="post__back">
+    <a href="/">&lt;-- home</a>
+  </div>
+
+  <div class="post__title">
+    <h1>{{ page.title | escape }}</h1>
+  </div>
+
+  <div class="post__date">
+    <p>{{ page.date | date: "%Y %b %-d" }}</p>
+  </div>
+
+  <div class="post__meta">
+    <span class="reading-time" title="Estimated read time">12 mins</span>
+  </div>
+
+  <div class="post__content"?>
+    {{ content }}
+  </div>
+
+  <script>
+    function readingTime(i){var n=(i=i||"").split(/\S+/).length;return n<360?"1 min":Math.floor(n/180)+" mins"}
+    document.querySelector(".reading-time").innerHTML = readingTime(document.querySelector('.post__content').innerText);
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/styles/nord.min.css" integrity="sha256-jDz6QotrRh9EbNuSpY46DQQZukm67mhTQGduA1WdB4A=" crossorigin="anonymous" />
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.15.6/highlight.min.js" integrity="sha256-aYTdUrn6Ow1DDgh5JTc3aDGnnju48y/1c8s1dgkYPQ8=" crossorigin="anonymous"></script>
+  <script>hljs.initHighlightingOnLoad();</script>
+</div>

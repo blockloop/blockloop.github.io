@@ -1,0 +1,18 @@
+---
+layout: default
+---
+
+{%- include header.html -%}
+
+<div class="blog">
+  <h1>Blog Posts:</h1>
+  {%- if site.posts.size > 0 -%}
+  <ul>
+    {%- for post in site.posts -%}
+    <li>
+      <span class="date">{{ post.date | date: "%Y %b %-d" }}</span> - <a href="{{ post.url | relative_url }}">{{ post.title | escape }}</a>
+    </li>
+    {%- endfor -%}
+  </ul>
+  {%- endif -%}
+</div>
