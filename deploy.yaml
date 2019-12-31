@@ -1,0 +1,59 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: jekyll-blog
+  labels:
+    app: jekyll-blog
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: jekyll-blog
+  template:
+    metadata:
+      labels:
+        app: jekyll-blog
+    spec:
+      imagePullSecrets:
+      - name: githubpkgcreds
+      containers:
+      - name: jekyll-blog
+        # image: docker.pkg.github.com/blockloop/jekyll-blog/jekyll-blog:1db1728b2751f92b1d8e6b05964ceb464f794bd7
+        image: nginx
+        imagePullPolicy: Always
+        env:
+        - name: PUID
+          value: "1000"
+        - name: PGID
+          value: "1000"
+        ports:
+        - containerPort: 80
+
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: jekyll-blog
+spec:
+  selector:
+    app: jekyll-blog
+  ports:
+  - protocol: TCP
+    name: web
+    port: 80
+    targetPort: 80
+
+---
+apiVersion: extensions/v1beta1
+kind: Ingress
+metadata:
+  name: jekyll-blog-ingress
+spec:
+  rules:
+  - host: blog.k3s.blockloop.io
+    http:
+      paths:
+      - backend:
+          serviceName: jekyll-blog
+          servicePort: 80
