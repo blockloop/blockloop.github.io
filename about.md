@@ -4,4 +4,5 @@ title: About
 permalink: /about/
 ---
 
-I write Go code and work at DigitalOcean
+I study philosophy and practice stoicism. 
+I think I am a Pyrrhonist, but I'm not sure.
